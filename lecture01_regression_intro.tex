@@ -1,0 +1,67 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{moreenum}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage[mathcal]{eucal}
+\usepackage{dsfont}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{lipsum} % For generating Lorem Ipsum text
+\lstset{
+  style              = Matlab-editor,
+  captionpos         =b,
+  basicstyle         = \mlttfamily,
+  escapechar         = ",
+  mlshowsectionrules = true,
+}
+
+\usepackage[thehwcnt = 1]{iidef}
+\thecourseinstitute{Tsinghua University}
+\thecoursename{Linear Regression Analysis}
+\theterm{Spring 2025}
+\hwname{Profile}
+
+\begin{document}
+\courseheader
+\name{Yu Yangcheng}
+
+
+\rule{\textwidth}{1pt}
+Non scholae sed vitae discimus.\\
+We learn not for school, but for life. \\
+\begin{flushright}
+  (Seneca, Letters to Lucilius, 82.5)
+\end{flushright}
+\rule{\textwidth}{1pt}
+\vspace{2em}
+
+\section{Introduction}
+This document is written for self-revision of the course Linear Regression Analysis and recognize my learning process. Therefore, it may not be a encyclopedic reference for this subject, but a personal profile of my learning. Now, it's time for our journey begins!
+\section{History of Regression}
+Linear regression is a statistical method that models the linear relationship between two variables. The word "Regression", was originate from Galton, Darwin's cousin, who first used it to describe the phenomenon that the offspring of parents with extreme characteristics tend to have characteristics that are closer to the average. \par
+Galton's discovery comes from Galton board, also called "quincunx" in PPT, which is a device consist of different layers of pins. When a ball is dropped from the top, it will bounce off the pins and finally fall into the bottom. The final distribution of the balls is a normal distribution.\par
+By observing this ball's distribution between different layers, Galton found that the balls tend to fall into the middle, and the distribution tends to be more and more distracted in the falling process. This leads to a paradox: if the offspring of parents with extreme characteristics would inherit their parents' characteristics, how could species keep stable? All in all, a species is recognized by some steady characteristics. \par
+Galton explain this by introducing the concept of regression. He found that the offspring of parents with extreme characteristics tend to have characteristics that are closer to the average. It doesn't mean that the inheritance is not exist, taller parents' children may still be more possible to be tall, but the bias will be smaller. For example, if the father is 2 meters tall(like Yao ming), the son may be 1.9 meters tall(Yao ming's daughter seems to be very tall, too). In long-term development, the regression effect will contain the accumulation of the variation. \par
+\section{Regression \& Correlation}
+Regression and Correlation are two closely related concepts. When you collected a series of data, you may want to draw the regression line to describe the relationship between the variables, and calculate the slope of the regression line. The slope of the regression line is always between -1 and 1, which is called the correlation coefficient. No matter what data you choose, you will always get a correlation coefficient between -1 and 1. This is \textbf{a game of mathematics}, having nothing to do with genes, magic, or anything else. \par 
+The slope's value have 3 cases:
+\begin{itemize}
+    \item If the slope is 0, it means that x,y does't have linear relationship. \textbf{But} x,y could have non-linear relationship, eg. $y=x^2$ (prove it!).
+    \item If the slop $\in (-1,1)$ \textbackslash $\{0\}$, it means that x,y could have linear relationship. The closer the slope is to 1, the stronger the linear relationship is. The sign of the slope indicates the direction of the relationship.
+    \item If the slop is $\pm 1$, it means that x,y are completely linear related.
+\end{itemize}
+\section{Math Explanation of Regression}
+If F is the n-1 th. generation's distribution, S is the n th. generation and $X_n$ is the variation in the n th. turn. We assume that the species is stable, meaning that $Var(S)=Var(F)$. Let $\rho (F,S)$ be the correlation coefficient of two variables $F$ and $S$. Then we have 
+$$ \rho(F,S)=\frac{Cov(F,S)}{\sqrt{Var(F)Var(S)}} = \frac{Cov(F,F+X_n)}{Var(F)Var(S)}=\frac{Var(F)+Cov(F,X_n)}{Var(F)Var(S)}=1+\frac{Cov(F,X_n)}{Var(F)}<1$$
+The final step is based on the assumption made in front. The conclusion is that the relation between $F$ and $X_n$ is negative. This is the math explanation of regression. \par
+\section{Regression \& Bivariate Normal Distribution}
+The bivariate normal distribution is a generalization of the normal distribution to two dimensions. It has two random variables, $X$ and $Y$, which are normally distributed and have a correlation coefficient $\rho$. The joint probability density function of $X$ and $Y$ is given by
+$$ f(x,y)=(2\pi \sigma_1\sigma_2\sqrt{1-\rho^2})^{-1}\exp [-\frac{1}{2(1-\rho^2)}\left(\frac{(x-\mu_1)}{\sigma_1^2}-\frac{2\rho(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)}{\sigma_2^2}\right)] $$
+Ususally, we use $N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$ to denote the bivariate normal distribution. $\mu$ and $\sigma^2$ means the mean/variation of x/y, and $\rho$ means the correlation coefficient between x and y. \par
+In regression analysis, if we assume that x,y's marginal distribution is normal, then the joint distribution of x and y is bivariate normal. Conversely, the regression model can describe the linear property of bivariate distribution. \par
+
+\end{document}
