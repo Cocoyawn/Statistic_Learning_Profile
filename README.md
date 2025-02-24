@@ -17,5 +17,5 @@ To navigate through the repository, start with the `README.md` file for an overv
 This repository utilizes the LaTeX template provided by [LaTeXTemplates.com](http://www.LaTeXTemplates.com). The template was created by Marion Lachaise and François Févotte, and it has been instrumental in structuring and formatting the documents in this repository. The template is licensed under the [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/) license.
 
 ## License
-The content of this repository is licensed under the [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/) license, which allows for non-commercial sharing and adaptation with proper attribution.
+The content of this repository is licensed under MIT License, which allows for free use, modification, and distribution of the content.
 
