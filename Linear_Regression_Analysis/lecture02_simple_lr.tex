@@ -46,7 +46,55 @@
 \section{Simple Linear Regression} % Numbered section
 
 \subsection{Building the structure}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent porttitor arcu luctus, imperdiet urna iaculis, mattis eros. Pellentesque iaculis odio vel nisl ullamcorper, nec faucibus ipsum molestie. Sed dictum nisl non aliquet porttitor. Etiam vulputate arcu dignissim, finibus sem et, viverra nisl. Aenean luctus congue massa, ut laoreet metus ornare in. Nunc fermentum nisi imperdiet lectus tincidunt vestibulum at ac elit. Nulla mattis nisl eu malesuada suscipit.
-
-
+The simple linear regression(SLE) model's formula is:
+\begin{equation}
+    Y_i = \beta_0 + \beta_1X_i + \varepsilon_i
+\end{equation}
+Where $Y_i$ is the response variable, $X_i$ is the predictor variable, $\beta_0$ is the intercept, $\beta_1$ is the slope, and $\varepsilon_i$ is the error term. The goal of simple linear regression is to estimate the coefficients $\beta_0$ and $\beta_1$ such that the error term $\varepsilon_i$ is minimized. The error term $\varepsilon_i$ is the difference between the observed value of the response variable and the value predicted by the model. The least squares method is used to estimate the coefficients. The least squares estimates(LSE) minimizes the sum of the squared errors. The sum of the squared errors is the sum of the squared differences between each observed value and the predicted value.
+Simple linear regression is built under 4 assumptions(LINE):
+\begin{enumerate}
+    \item Linear Function: The mean of the response($E(Y_i)$), at each value of the predictor($X_i$), is a linear function of $X_i$.
+    \item Independent: The errors($\varepsilon_i$) are independent.
+    \item Normally Distributed: The errors($\varepsilon_i$) are normally distributed.
+    \item Equal Variance: The errors($\varepsilon_i$) have Equal variances.
+\end{enumerate}
+Why should we have these assumptions? Firstly, Taylor expansion tells us that most of the functions can be approximated by a linear function, as long as the range is small enough. Secondly, independent errors make writting the joint distribution of the errors easier(We just need to do production). Thirdly, if we assume the errors are normally distributed, we can use the "$3 \sigma$" principle to calculate the confidence interval. Finally, equal variance can reduce the complexity of the model.
+\begin{info}
+    Review what we just have learnt: SLR's LINE assumptions({\bf L}inear, {\bf I}ndepent, {\bf N}ormally distributed, {\bf E}qual variance). In the following sections, we will take them as granted.
+\end{info}
+\subsection{Estimate the coefficients}
+In SLR, we have {\bf 3} coefficients to estimate: $\beta_0$, $\beta_1$, and $\varepsilon_i$. The last one, $\varepsilon_i$, helps us to evaluate the model's performance. (Obviously, the smaller $\varepsilon_i$ is, the better the model is.) \\
+To estimate them, we will have 2 methods: {\bf 1.} least squares estimates(LSE), and {\bf 2.} Maximum Likelihood Estimates(MLE). The LSE method minimizes the sum of the squared errors, while the MLE method maximizes the likelihood function. 
+\subsubsection{Least Squares Estimates}
+In the LSE method, we want to choose $\beta_0$ and $\beta_1$ to minimize
+$$ Q = \sum(Y_i-\beta_0-\beta_1 X_i)^{2} $$
+Let's do calculus:
+\begin{align*}
+    \frac{\partial Q}{\partial \beta_0} &= -2\sum(Y_i-\beta_0-\beta_1 X_i) = 0 \\
+    \frac{\partial Q}{\partial \beta_1} &= -2\sum(Y_i-\beta_0-\beta_1 X_i)X_i = 0
+\end{align*}
+Solve the equations, we get:
+\begin{align*}
+    \hat{\beta_1} &= \frac{\sum(X_i-\bar{X})(Y_i-\bar{Y})}{\sum(X_i-\bar{X})^2} \\
+    \hat{\beta_0} &= \bar{Y} - \hat{\beta_1}\bar{X}
+\end{align*}
+Replace $\hat{\beta_0}$ and $\hat{\beta_1}$ with $b_0$, $b_1$, we find:
+$$ \sum_{i=1}^{n}e_i = 0, \quad  \sum_{i=1}^{n}X_i e_i = 0$$
+\begin{warn}
+    The degress of freedom (df) of $e_1,e_2\dots e_n$ is $n-2$, because every time we add a constraint, we reduce the df by 1. Therefore, 
+    $$ s ^{2} = \frac{\sum_{i=1}^{n}e_i^2}{n-1}=\frac{SSE}{df_E}=MSE $$
+    SSE is the short of Sum of Squared Errors, and MSE is the short of Mean Squared Errors.
+\end{warn}
+\subsubsection{Maximum Likelihood Estimates}
+In the MLE method, we want to maximize the likelihood function:
+$$ L(\beta_0,\beta_1,\sigma ^{2} | X_i,Y_i) = \prod_{i=1}^{n}f(Y_i|X_i;\beta_0,\beta_1,\sigma ^{2}) $$
+Where $f(Y_i|X_i;\beta_0,\beta_1,\sigma ^{2})$ is the probability density function of $Y_i$ given $X_i$. We assume that $Y_i$ is normally distributed, so we have:
+$$ f(Y_i|X_i;\beta_0,\beta_1,\sigma ^{2}) = \frac{1}{\sqrt{2\pi}\sigma}exp\left(-\frac{(Y_i-\beta_0-\beta_1X_i)^2}{2\sigma^2}\right) $$
+To get the MLE, we need to find $argmax_{\beta_0, \beta_1, \sigma ^{2}} L(\beta_0, \beta_1, \sigma ^{2})$, that's to say, $argmax_{\beta_0, \beta_1, \sigma ^{2}}-\log L(\beta_0,\beta_1,\sigma^2)$
+Use calculus, we get:
+\begin{align*}
+    &\hat{\beta}_0^{ml}=b_0, \quad \hat{\beta}_1^{ml}=b_1, \\
+    &\hat{\sigma}^{2^{ml}}=\frac{\sum_{i=1}^{n}e_i^2}{n}
+\end{align*}
+Why do we get different MSE(mean squared errors) in LSE and MLE? Because in MLE, we assume the normal distribution of $Y_i$ at the beginning, which allow us to get n df. This also results in: ML estimates rely on distributional assumptions, while LS estimates do not.
 \end{document}
